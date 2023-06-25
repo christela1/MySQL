@@ -1,0 +1,36 @@
+# For this project i downloaded the Warehouse Orders dataset from BigQuery.
+# The data is made up from two main tables (warehouse, orders).
+--Query #1
+--Get an overview of the data. Instead of looking at the entire table, will focus in the first 100 rows.
+SELECT 
+  *
+FROM 
+  warehouse_orders.Warehouse,
+  warehouse_orders.Orders 
+LIMIT 
+  100
+
+SELECT 
+  orders.*/
+  warehouse.warehouse_alias,
+  warehouse_state
+FROM 
+  warehouse_orders.Orders orders 
+JOIN
+ warehouse_orders.Warehouse warehouse ON orders.warehouse_id = warehouse.warehouse_id
+
+-- Provide a list of how many states are in the order data.
+
+SELECT 
+  warehouse.state AS state,
+  COUNT(DISTINCT warehouse.state) AS num_state
+FROM 
+  warehouse_orders.Orders orders
+JOIN
+ warehouse_orders.Warehouse warehouse ON orders.warehouse_id = warehouse.warehouse_id
+GROUP BY 
+  warehouse.state
+  
+  
+
+  
