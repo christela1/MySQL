@@ -1,0 +1,20 @@
+-- For this project I downloaded the Airbnb_nyc data from Tableau web.
+-- QUERY #1 
+-- Get an overview of the data. Instead of looking at the entire table, the focus will be only at the first 100 rows.
+SELECT * 
+FROM `airbnb.airbnb1`
+LIMIT 100
+
+-- In addtion, provide a list of the airbnb property only in Queen.
+SELECT * 
+FROM airbnb.airbnb1 
+WHERE 
+Neighbourhood_ = 'Queens'
+ 
+-- Provide a list of Price from the lowest to the highest.
+SELECT  
+Host_Id,
+Price 
+FROM `airbnb.airbnb1`
+GROUP BY Host_Id, Price 
+ORDER BY Price asc
