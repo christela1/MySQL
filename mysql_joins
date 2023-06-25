@@ -1,0 +1,70 @@
+CREATE TABLE joins;
+Use joins;
+
+CREATE TABLE employees (
+name VARCHAR (6),
+department_id VARCHAR (3),
+role (5);
+
+CREATE TABLE  departments, 
+name VARCHAR (8),
+department_id VARCHAR(4);
+
+INSERT INTO employees
+VALUES ('Dave Smith', 1, 'Product Marketing Manager'),
+('Julie Jones', 2, 'Software Engineer'),
+('Scott Tanner', 1,  'Direct of Demand Gem'),
+('Ted Connor', 2, 'Software Engineer'),
+('Marget Lane', 1, 'VP of Marketing'),
+('Mary Martin', 5, 'Recepionist');
+
+SELECT *
+FROM employees;
+
+INSERT INTO departments
+VALUES ('Marketing', 1),
+('Engineer', 2),
+('Accounting', 3),
+('Sales', 4)
+
+SELECT * 
+FROM departments;
+
+--INNER JOIN
+--Provide a list of employees with their department name.
+SELECT 
+ employee.name AS employee_name,
+ employees.role AS employee_role,
+ departments.name AS department_name
+FROM 
+ employee
+INNER JOIN
+ departments ON 
+ employees.department_id = departments.department_id
+
+ -- LEFT/RIGHT JOIN
+ -- Provide a list of all employees and departments.
+ SELECT 
+ employee.name AS employee_name,
+ employees.role AS employee_role,
+ departments.name AS department_name
+FROM 
+ employee
+ LEFT JOIN 
+ departments ON 
+ employees.department_id = departments.department_id
+
+ --OUTER JOIN.
+  SELECT 
+ employee.name AS employee_name,
+ employees.role AS employee_role,
+ departments.name AS department_name
+FROM 
+ employee
+ FULL OUTER JOIN
+ departments ON 
+ employees.department_id = departments.department_id
+ 
+ 
+ 
+
