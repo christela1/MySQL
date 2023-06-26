@@ -1,0 +1,34 @@
+-- For this query i used the "Avocado Sales" from Kaggle.
+-- The data already shows us the total column, but we want to make sure how the data is calculated.
+--QUERY #1
+SELECT 
+  Date,
+  Region,
+  Small_Bags,
+  Large_Bags,
+  XLarge_Bags,
+  Total_Bags,
+  Small_Bags + Large_Bags + XLarge_Bags AS Total_Bags_Calc
+FROM 
+ avocado_data.avocado_prices
+-- After running the query we see that the 'Total_Bags' and 'Taotal_Bags_Calc" are the same. Now we are sure that the data we want to use is the right data.
+
+-- QUERY #2 
+-- Provide a list of what % of total number of bags were small one.
+
+SELECT 
+  Date,
+  Region,
+  Total_Bags,
+  Small_Bags,
+ (Small_Bags / Total_Bags) * 100 AS Small_Baga_Percent 
+FROM 
+  avocado_data.avocado_prices 
+WHERE
+  Total_Bags <> 0
+  
+  
+  
+
+  
+  
