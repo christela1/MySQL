@@ -1,0 +1,29 @@
+--For this project I uploaded the Warehouse Orders dataset from BigQuery.
+-- Query #1 
+--Provide a list of what % of the orders are performed by which warehouse.
+
+
+SELECT 
+ Warehouse.warehouse_id,
+ CONCAT(Warehouse.state, ':' , Warehouse.warehouse.alias) AS warehouse_name,
+ COUNT(Orders.orders_id) AS number_of_orders,
+ (SELECT
+  COUNT (*)
+  FROM warehouse_orders.Orders Orders)
+AS total_orders,
+CASE 
+ WHEN(Orders.order_id)/ (SELECTCOUNT (*)  FROM warehouse_orders.Orders Orders) <= 0.20
+ THEN "fulfilled 0-20% of Orders"
+ WHEN (Orders.order_id)/ (SELECTCOUNT (*)  FROM warehouse_orders.Orders Orders) > 0.20
+ AND (Orders.order_id)/ (SELECTCOUNT (*)  FROM warehouse_orders.Orders Orders) <= 0.60
+ THEN "fulfilled 21-60%of Orders"
+ ELSE "fulfilled momre than more than 60% of orders"
+ END AS fulfillment_summary
+FROM warehouse_orders.Warehouse Warehouse
+LEFT JOIN warehouse_orders.Orders Orders 
+ ON Order.warehouse_id = Warehouse.warehouse_id
+ GROUP BY 
+  Warehouse.warehouse_id,
+  warehouse_name;
+  HAVING 
+   COUNT (Orders.order_id )> 0
